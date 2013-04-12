@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  skip_before_filter :require_user, :only => [:new, :create]
+
+  
   # GET /users
   # GET /users.json
   def index
@@ -40,15 +43,30 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+        
     @user = User.new(params[:user])
 
+    if User.find_by(email: params[:user][:email])
+        error = true
+    else
+        error = false
+    end
+
     respond_to do |format|
-      if @user.save
+      if !error && @user.save
+        user = User.find_by(email: @user.email)
+        session[:user] = user
+        session[:user_id] = user.id
+        
+        logger.debug "Session: #{session}"
+        
+        #redirect_to courses_path
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
+
       else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+          format.html { render action: "new" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end

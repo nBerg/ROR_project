@@ -13,6 +13,11 @@ RORProject::Application.routes.draw do
 
   resources :users
 
+  #resources :session, :only => [:create, :new, :destroy]
+  match "signup" => "users#new", :as => "signup"
+  match "login" => "sessions#new", :as => "login", :via => :get
+  match "login" => "sessions#create", :via => :post
+  match "logout" => "sessions#destroy", :as => "logout"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -64,7 +69,7 @@ RORProject::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'sessions#new'
 
   # See how all your routes lay out with "rake routes"
 
