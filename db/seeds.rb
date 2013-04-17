@@ -5,3 +5,17 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Empty the database
+Mongoid.default_session.collections.reject { |c| c.name =~ /^system/}.each(&:drop)
+
+# Populate databse with some users and courses
+Rake::Task['import:import_users_csv'].invoke
+Rake::Task['import:import_courses_csv'].invoke
+
+# Create some random relationships
+20.times do
+	c = Course.all.sample # find a random course
+	u = User.all.sample # find a random user
+	c.users << u unless c.users.include?(u) # create relationship, unless they are already related, to prevent duplicates
+end
