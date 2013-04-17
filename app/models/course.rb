@@ -4,6 +4,12 @@ class Course
   embeds_many :lectures
   has_and_belongs_to_many :users
 
-  field :c_num, type: String
-  field :name, type: String
+  field :CallNumber, type: Integer
+  field :CourseTitle, type: String
+  field :StartTime1, type: String
+  field :EndTime1, type: String
+  field :MeetsOn1, type: String
+  field :Building1, type: String
+  field :Room1, type: String
+  field :Instructor1Name, type: String
 end
