@@ -1,12 +1,24 @@
+<h1>Welcome to Course Manager!</h1>
 
-<%= form_for :session, :method => :post do |f| %>
+<div class="row-fluid">
+	<div class="offset4 span8">
+		<%= form_for :session, :method => :post, :html => {class: "form-horizontal"} do |f| %>
+			
+			<div class="control-group">
+  			<%= f.label "Email address", class: "control-label" %>
+  			<div class="controls">
+  				<%= f.text_field :email %>
+  			</div>
+  		</div>
 
-  <%= f.label "Email address" %>
-  <%= f.text_field :email %>
+		  <div class="actions control-group">
+		  	<div class="controls">
+    			<%= f.submit "Log in", class: "btn btn-large btn-primary" %>
+    		</div>
+  		</div>
 
-  <div class="actions">
-    <br/>
-    <%= f.submit "Log in" %>
-  </div>
+		<% end %>
 
-<% end %>
+		<p>New user? <%= link_to "Sign up now!", signup_path, class: "" %></p>
+	</div>
+</div>

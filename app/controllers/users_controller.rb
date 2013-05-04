@@ -46,14 +46,9 @@ class UsersController < ApplicationController
         
     @user = User.new(params[:user])
 
-    if User.find_by(email: params[:user][:email])
-        error = true
-    else
-        error = false
-    end
 
     respond_to do |format|
-      if !error && @user.save
+      if @user.save
         user = User.find_by(email: @user.email)
         session[:user] = user
         session[:user_id] = user.id

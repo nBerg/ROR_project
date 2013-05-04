@@ -9,8 +9,9 @@ class SessionsController < ApplicationController
     if user
       session[:user] = user
       session[:user_id] = user.id
-      redirect_to courses_path
+      redirect_to user
     else
+      flash.now[:error] = "Invalid email"
       render "new"
     end  
   end

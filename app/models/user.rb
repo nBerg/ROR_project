@@ -8,9 +8,17 @@ class User
   field :email, type: String
   field :admin, type: Boolean, default: false
 
-  validates_presence_of :first_name, :last_name
-  validates_presence_of :email
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/
+  before_save { email.downcase! }
 
-  validates_uniqueness_of :first_name, :last_name, :email, :case_sensitive => false
+  validates :first_name, :last_name, presence: true, 
+                                    length: {maximum: 50},
+                                    uniqueness: {case_sensitive: false}
+
+  validates :email, presence: true, 
+                    format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/},
+                    uniqueness: {case_sensitive: false},
+                    confirmation: true
+
+  validates :email_confirmation, presence: true
+
 end
