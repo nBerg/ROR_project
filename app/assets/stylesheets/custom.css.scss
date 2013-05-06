@@ -51,6 +51,10 @@ h2 {
   color: $grayLight;
 }
 
+h5 {
+  color: $grayLight;
+}
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -112,9 +116,12 @@ footer {
   }
 }
 
-
 .field_with_errors {
   @extend .control-group;
   @extend .error;
 }
 
+/* user's course list */
+.courses-list ul {
+  list-style: none;
+}

@@ -1,45 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Callnumber:</b>
-  <%= @course.CallNumber %>
-</p>
+<div class="row-fluid">
+  
+  <div class="span3">
+    <h5><%= @course.CallNumber %> - <%= @course.CourseTitle %></h5>
+    <%= @course.MeetsOn1 %> 
+    <%= Time.parse(@course.StartTime1).strftime("%I:%M %p") %> - 
+    <%= Time.parse(@course.EndTime1).strftime("%I:%M %p") %> <br>
+    <%= @course.Room1 %> <%= @course.Building1 %> <br>
+    <%= @course.Instructor1Name %>
+  </div>
 
-<p>
-  <b>Coursetitle:</b>
-  <%= @course.CourseTitle %>
-</p>
+  <div class="offset1 span2 courses-list">
+    <h2>Registered Students:</h2>
+    <% @course.users.each do |user| %>
+      <ul>
+        <li>
+          <%= user.first_name %> <%= user.last_name %>
+        </li>
+      </ul>
+    <% end %>
+  </div>
 
-<p>
-  <b>Starttime1:</b>
-  <%= @course.StartTime1 %>
-</p>
-
-<p>
-  <b>Endtime1:</b>
-  <%= @course.EndTime1 %>
-</p>
-
-<p>
-  <b>Meetson1:</b>
-  <%= @course.MeetsOn1 %>
-</p>
-
-<p>
-  <b>Building1:</b>
-  <%= @course.Building1 %>
-</p>
-
-<p>
-  <b>Room1:</b>
-  <%= @course.Room1 %>
-</p>
-
-<p>
-  <b>Instructor1name:</b>
-  <%= @course.Instructor1Name %>
-</p>
-
+</div>
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>

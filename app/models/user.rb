@@ -6,7 +6,7 @@ class User
   field :first_name, type: String
   field :last_name, type: String
   field :email, type: String
-  field :admin, type: Boolean, default: false
+  field :role, type: String, default: 'Student'
 
   before_save { email.downcase! }
 
@@ -19,5 +19,7 @@ class User
                     confirmation: true
 
   validates :email_confirmation, presence: true
+
+  validates :admin, inclusion: { in: ['Student', 'Admin']}
 
 end

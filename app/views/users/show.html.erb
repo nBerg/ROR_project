@@ -1,26 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <div class="row-fluid">
-	<p>
-	  <b>First name:</b>
-	  <%= @user.first_name %>
-	</p>
 
-	<p>
-	  <b>Last name:</b>
-	  <%= @user.last_name %>
-	</p>
+	<div class="span3">
+		<h2>User Information:</h2>
 
-	<p>
-	  <b>Email:</b>
-	  <%= @user.email %>
-	</p>
+		<dl class="dl-horizontal">
+		  <dt>First Name:</dt>
+	  	<dd><%= @user.first_name %></dd>
+		
+		  <dt>Last Name:</dt>
+	  	<dd><%= @user.last_name %></dd>
 
-	<p>
-	  <b>Admin:</b>
-	  <%= @user.admin %>
-	</p>
+		  <dt>Email:</dt>
+	  	<dd><%= @user.email %></dd>
+		</dl>
+	</div>
+
+	<div class="span5 courses-list">
+		<h2>Courses:</h2>
+		<% @user.courses.each do |course| %>
+			<ul>
+				<li>
+					<%= link_to "#{course.CallNumber} - #{course.CourseTitle}", course, class: 'btn btn-link' %>
+				</li>
+			</ul>
+		<% end %>
+	</div>
+
 </div>
+
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
