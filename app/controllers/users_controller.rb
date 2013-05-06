@@ -53,15 +53,13 @@ class UsersController < ApplicationController
         session[:user] = user
         session[:user_id] = user.id
         
-        logger.debug "Session: #{session}"
-        
-        #redirect_to courses_path
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        flash[:success] = 'User was successfully created.'
+        format.html { redirect_to @user }
         format.json { render json: @user, status: :created, location: @user }
 
       else
-          format.html { render action: "new" }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end

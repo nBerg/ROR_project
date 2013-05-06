@@ -9,10 +9,11 @@ class SessionsController < ApplicationController
     if user
       session[:user] = user
       session[:user_id] = user.id
+      flash[:success] = 'Welcome to Course Manager!'
       redirect_to user
     else
-      flash.now[:error] = "Invalid email"
-      render "new"
+      flash.now[:error] = 'Email not registered to a user.'
+      render action: 'new'
     end  
   end
 

@@ -11,8 +11,7 @@ class User
   before_save { email.downcase! }
 
   validates :first_name, :last_name, presence: true, 
-                                    length: {maximum: 50},
-                                    uniqueness: {case_sensitive: false}
+                                    length: {maximum: 50}
 
   validates :email, presence: true, 
                     format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/},
