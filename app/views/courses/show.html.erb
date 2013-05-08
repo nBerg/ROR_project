@@ -1,28 +1,5 @@
-<p id="notice"><%= notice %></p>
-
 <div class="row-fluid">
-  
-  <div class="span3">
-    <h5><%= @course.CallNumber %> - <%= @course.CourseTitle %></h5>
-    <%= @course.MeetsOn1 %> 
-    <%= Time.parse(@course.StartTime1).strftime("%I:%M %p") %> - 
-    <%= Time.parse(@course.EndTime1).strftime("%I:%M %p") %> <br>
-    <%= @course.Room1 %> <%= @course.Building1 %> <br>
-    <%= @course.Instructor1Name %>
-  </div>
 
-  <div class="offset1 span2 courses-list">
-    <h2>Registered Students:</h2>
-    <% @course.users.each do |user| %>
-      <ul>
-        <li>
-          <%= user.first_name %> <%= user.last_name %>
-        </li>
-      </ul>
-    <% end %>
-  </div>
+Course Homepage
 
 </div>
-
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>

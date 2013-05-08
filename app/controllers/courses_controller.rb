@@ -57,14 +57,26 @@ class CoursesController < ApplicationController
   # PUT /courses/1.json
   def update
     @course = Course.find(params[:id])
-
+  
     respond_to do |format|
-      if @course.update_attributes(params[:course])
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
-        format.json { head :no_content }
+      if params[:commit] == "Enroll Student"
+        @user = User.find_by(email: params[:email])
+        if @user && admin?
+          @course.users << @user
+          flash.now[:success] = 'Student was successfully enrolled'
+          format.html { render action: "enroll"}
+        else
+          flash.now[:error] = 'Error trying to enroll student'
+          format.html { render action: "enroll" }
+        end
       else
-        format.html { render action: "edit" }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        if @course.update_attributes(params[:course])
+          format.html { redirect_to @course, notice: 'Course was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @course.errors, status: :unprocessable_entity }
+        end 
       end
     end
   end
@@ -79,5 +91,10 @@ class CoursesController < ApplicationController
       format.html { redirect_to courses_url }
       format.json { head :no_content }
     end
+  end
+
+  # GET /courses/1/enroll
+  def enroll
+    @course = Course.find(params[:id])
   end
 end

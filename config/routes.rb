@@ -14,10 +14,14 @@ RORProject::Application.routes.draw do
   resources :users
 
   #resources :session, :only => [:create, :new, :destroy]
-  match "signup" => "users#new", :as => "signup"
-  match "login" => "sessions#new", :as => "login", :via => :get
-  match "login" => "sessions#create", :via => :post
-  match "logout" => "sessions#destroy", :as => "logout"
+  match "signup"  => "users#new", :as => "signup"
+  match "login"   => "sessions#new", :as => "login", :via => :get
+  match "login"   => "sessions#create", :via => :post
+  match "logout"  => "sessions#destroy", :as => "logout"
+
+  match "courses/:id/enroll" => "courses#enroll", :as => "enroll", :via => :get
+  match "courses/:id/enroll" => "courses#update", :via => :put
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
