@@ -13,6 +13,4 @@ class Course
   field :Room1, type: String
   field :Instructor1Name, type: String
 
-
-  validates_presence_of :CourseTitle
 end
