@@ -1,14 +1,5 @@
 <div class="row-fluid">
 
-	<div class="span3">
-		<div class="well">
-			<p class="nav-header center">User Information:</p>
-			<p class="center"><%= @user.first_name %> <%= @user.last_name %>
-			<br><%= @user.email %></p>
-		</div>
-	</div>
-
-	<div class="span5 courses-list">
 		<h2>Courses:</h2>
 		<% @user.courses.each do |course| %>
 			<ul>

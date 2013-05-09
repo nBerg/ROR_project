@@ -2,16 +2,19 @@ class EnrollmentsController < ApplicationController
   before_filter :require_admin, :except => [:index]
   before_filter :get_course
 
+  # GET /courses/1/enrollments
   def index
     @course = Course.find(params[:course_id])
   end
 
+  # GET /courses/1/enrollments/new
   def new
     respond_to do |format|
       format.html
     end
   end
 
+  # POST /courses/1/enrollments
   def create
     @user = User.find_by(email: params[:email].downcase)
 
@@ -27,7 +30,7 @@ class EnrollmentsController < ApplicationController
     end
   end
 
-  # GET /courses/1/enroll
+  # DELETE /courses/1/enrollments/1
   def destroy
     logger.debug params
     @user = User.find(params[:id])
