@@ -19,6 +19,6 @@ Rake::Task['import:populate_users'].invoke
 250.times do
 	c = Course.all.sample # find a random course
 	u = User.all.sample # find a random user
-	c.users << u unless c.users.include?(u) # create relationship, unless they are already related, to prevent duplicates
+	#c.users << u unless c.users.include?(u) # create relationship, unless they are already related, to prevent duplicates
   u.courses << c unless u.courses.include?(c)
 end

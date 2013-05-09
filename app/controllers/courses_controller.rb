@@ -1,8 +1,10 @@
 class CoursesController < ApplicationController
+    before_filter :require_admin, :except => [:index, :show]
+
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    @courses = Course.order_by('CallNumber ASC').paginate(page: params[:page], :per_page => 30)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -60,7 +62,7 @@ class CoursesController < ApplicationController
   
     respond_to do |format|
       if params[:commit] == "Enroll Student"
-        @user = User.find_by(email: params[:email])
+        @user = User.find_by(email: params[:email].downcase)
         if @user && admin?
           @course.users << @user
           flash.now[:success] = 'Student was successfully enrolled'
@@ -88,6 +90,7 @@ class CoursesController < ApplicationController
     @course.destroy
 
     respond_to do |format|
+      flash[:success] = 'Course was successfully destroyed'
       format.html { redirect_to courses_url }
       format.json { head :no_content }
     end
