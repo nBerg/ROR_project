@@ -20,6 +20,14 @@ class ApplicationController < ActionController::Base
     @current_user != nil
   end
 
+  def require_admin
+    if @current_user.role == 'Admin'
+      return true
+    end
+    #perhaps send to an error page?
+    redirect_to user_url(@current_user)
+  end
+
   def admin?
     @current_user.role == 'Admin'
   end

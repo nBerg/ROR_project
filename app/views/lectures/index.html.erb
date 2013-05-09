@@ -11,13 +11,13 @@
 <% @lectures.each do |lecture| %>
   <tr>
     <td><%= lecture.num %></td>
-    <td><%= link_to 'Show', lecture %></td>
-    <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
-    <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', [@course, lecture] %></td>
+    <td><%= link_to 'Edit', edit_course_lecture_path(@course, lecture) %></td>
+    <td><%= link_to 'Destroy', [@course, lecture], method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Lecture', new_lecture_path %>
+<%= link_to 'New Lecture', new_course_lecture_path(@course) %>

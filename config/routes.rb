@@ -1,15 +1,10 @@
 RORProject::Application.routes.draw do
-  resources :uploads
+  
+  resources :courses do
+    resources :lectures
+  end 
 
-
-  resources :assignments
-
-
-  resources :lectures
-
-
-  resources :courses
-
+  resources :uploads, :assignments
 
   resources :users
 

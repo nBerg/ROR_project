@@ -1,8 +1,10 @@
 class LecturesController < ApplicationController
+  before_filter :get_course
+
   # GET /lectures
   # GET /lectures.json
   def index
-    @lectures = Lecture.all
+    @lectures = @course.lectures
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,7 @@ class LecturesController < ApplicationController
   # GET /lectures/1
   # GET /lectures/1.json
   def show
-    @lecture = Lecture.find(params[:id])
+    @lecture = @course.lectures.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,7 @@ class LecturesController < ApplicationController
   # GET /lectures/new
   # GET /lectures/new.json
   def new
-    @lecture = Lecture.new
+    @lecture = @course.lectures.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,17 +36,22 @@ class LecturesController < ApplicationController
 
   # GET /lectures/1/edit
   def edit
-    @lecture = Lecture.find(params[:id])
+    @lecture = @course.lectures.find(params[:id])
   end
 
   # POST /lectures
   # POST /lectures.json
   def create
-    @lecture = Lecture.new(params[:lecture])
+
+    logger.debug "HERE2"
+    logger.debug params
+
+    @lecture = @course.lectures.new(params[:lecture])
 
     respond_to do |format|
       if @lecture.save
-        format.html { redirect_to @lecture, notice: 'Lecture was successfully created.' }
+        flash[:success] = 'Lecture was successfully created.'
+        format.html { redirect_to course_lectures_path(@course) }
         format.json { render json: @lecture, status: :created, location: @lecture }
       else
         format.html { render action: "new" }
@@ -56,7 +63,7 @@ class LecturesController < ApplicationController
   # PUT /lectures/1
   # PUT /lectures/1.json
   def update
-    @lecture = Lecture.find(params[:id])
+    @lecture = @course.lectures.find(params[:id])
 
     respond_to do |format|
       if @lecture.update_attributes(params[:lecture])
@@ -72,12 +79,19 @@ class LecturesController < ApplicationController
   # DELETE /lectures/1
   # DELETE /lectures/1.json
   def destroy
-    @lecture = Lecture.find(params[:id])
+    @lecture = @course.lectures.find(params[:id])
     @lecture.destroy
 
     respond_to do |format|
-      format.html { redirect_to lectures_url }
+      format.html { redirect_to course_lectures_url }
       format.json { head :no_content }
     end
   end
+
+  def get_course
+    logger.debug "HERE"
+    logger.debug params
+    @course = Course.find(params[:course_id])
+  end
+
 end

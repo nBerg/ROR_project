@@ -1,5 +1,10 @@
 <div class="row-fluid">
 
-Course Homepage
+  <h3><%= @course.CallNumber %> - <%= @course.CourseTitle %></h3>
+  <%= @course.MeetsOn1 %> 
+  <%= Time.parse(@course.StartTime1).strftime("%I:%M %p") %> - 
+  <%= Time.parse(@course.EndTime1).strftime("%I:%M %p") %> <br>
+  <%= @course.Room1 %> <%= @course.Building1 %> <br>
+  <%= @course.Instructor1Name %>
 
 </div>
