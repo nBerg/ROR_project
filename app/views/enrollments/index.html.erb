@@ -1,0 +1,28 @@
+<div class="row-fluid">
+  <div class="offset1 span4 courses-list">
+    <h2>Registered Students:</h2>
+    <% @course.users.each do |user| %>
+      <ul>
+        <li>
+          <%= link_to "#{user.first_name} #{user.last_name}", user %>
+          <% if admin? %>
+            <div class="pull-right">
+              <%= link_to 'Remove', 
+                  course_enrollment_path(@course, user), 
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+            </div>
+          <% end %>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</div>
+
+<br><br>
+
+<% if admin? %>
+  <div class="btn offset1">
+    <%= link_to 'Add a student', new_course_enrollment_path(@course) %>
+  </div>
+<% end %>

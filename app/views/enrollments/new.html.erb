@@ -1,0 +1,10 @@
+<div class="row-fluid">
+  <div class="offset1 span4">
+    <h2>Enroll a Student:</h2>
+    <%= form_tag(course_enrollments_path, :method => "post") do %>
+      <%= label_tag(:email, "Student's Email:") %>
+      <%= text_field_tag(:email) %>
+      <%= submit_tag "Enroll Student", :class => "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -2,6 +2,7 @@ RORProject::Application.routes.draw do
   
   resources :courses do
     resources :lectures
+    resources :enrollments, :except => [:edit, :update, :show]
   end 
 
   resources :uploads, :assignments
@@ -13,10 +14,6 @@ RORProject::Application.routes.draw do
   match "login"   => "sessions#new", :as => "login", :via => :get
   match "login"   => "sessions#create", :via => :post
   match "logout"  => "sessions#destroy", :as => "logout"
-
-  match "courses/:id/enroll" => "courses#enroll", :as => "enroll", :via => :get
-  match "courses/:id/enroll" => "courses#update", :via => :put
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

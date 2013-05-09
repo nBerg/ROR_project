@@ -62,26 +62,14 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
   
     respond_to do |format|
-      if params[:commit] == "Enroll Student"
-        @user = User.find_by(email: params[:email].downcase)
-        if @user && admin?
-          @course.users << @user
-          flash.now[:success] = 'Student was successfully enrolled'
-          format.html { render action: "enroll"}
-        else
-          flash.now[:error] = 'Error trying to enroll student'
-          format.html { render action: "enroll" }
-        end
+      if @course.update_attributes(params[:course])
+        flash[:success] = 'Course was successfully updated.'
+        format.html { redirect_to @course }
+        format.json { head :no_content }
       else
-        if @course.update_attributes(params[:course])
-          flash[:success] = 'Course was successfully updated.'
-          format.html { redirect_to @course }
-          format.json { head :no_content }
-        else
-          format.html { render action: "edit" }
-          format.json { render json: @course.errors, status: :unprocessable_entity }
-        end 
-      end
+        format.html { render action: "edit" }
+        format.json { render json: @course.errors, status: :unprocessable_entity }
+      end 
     end
   end
 
@@ -92,14 +80,9 @@ class CoursesController < ApplicationController
     @course.destroy
 
     respond_to do |format|
-      flash[:success] = 'Course was successfully destroyed'
+      flash[:success] = 'Course was successfully destroyed.'
       format.html { redirect_to courses_url }
       format.json { head :no_content }
     end
-  end
-
-  # GET /courses/1/enroll
-  def enroll
-    @course = Course.find(params[:id])
   end
 end
