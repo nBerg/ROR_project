@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
-  skip_before_filter :require_user, :only => [:new, :create]
-  before_filter :require_admin, :only => [:index]
+  skip_before_filter  :require_user, :only => [:new, :create]
+  before_filter       :correct_user, :only => [:edit, :update]
+  before_filter       :require_admin, :only => [:index, :destroy]
 
   
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.order_by('last_name ASC').paginate(page: params[:page], :per_page => 30)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -89,8 +90,16 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
+      flash[:success] = 'User was successfully destroyed'
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)
+    end
 end

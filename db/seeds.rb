@@ -13,9 +13,10 @@ Mongoid.purge!
 # Populate databse with some users and courses
 Rake::Task['import:import_users_csv'].invoke
 Rake::Task['import:import_courses_csv'].invoke
+Rake::Task['import:populate_users'].invoke
 
 # Create some random relationships
-40.times do
+250.times do
 	c = Course.all.sample # find a random course
 	u = User.all.sample # find a random user
 	c.users << u unless c.users.include?(u) # create relationship, unless they are already related, to prevent duplicates

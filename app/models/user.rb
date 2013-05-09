@@ -9,5 +9,7 @@ class User
   field :role, type: String, default: 'Student'
 
   before_save { email.downcase! }
+  before_save { first_name.capitalize! }
+  before_save { last_name.capitalize! }
 
 end

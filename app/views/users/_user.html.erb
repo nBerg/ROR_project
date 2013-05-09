@@ -1,0 +1,18 @@
+<li class="row-fluid">
+  <div class="row-fluid">
+
+    <div class="span10">
+      <%= link_to "#{user.first_name} #{user.last_name}", user %><br>
+      <%= user.email %><br>
+      Role: <%= user.role %><br>
+    </div>
+
+    <div class="span2">
+      <% if !current_user?(user) %>
+        <%= link_to 'Destroy', user, method: :delete, 
+                                  data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </div>
+
+  </div>
+</li>

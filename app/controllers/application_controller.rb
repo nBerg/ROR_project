@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :require_user
-  helper_method :current_user, :logged_in?, :admin?
+  helper_method :current_user, :logged_in?, :admin?, :current_user?
 
   def current_user
     if @current_user.nil?
@@ -24,12 +24,15 @@ class ApplicationController < ActionController::Base
     if @current_user.role == 'Admin'
       return true
     end
-    #perhaps send to an error page?
-    redirect_to user_url(@current_user)
+    redirect_to root_url
   end
 
   def admin?
     @current_user.role == 'Admin'
+  end
+
+  def current_user?(user)
+    user == @current_user
   end
 
 end

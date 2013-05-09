@@ -1,4 +1,5 @@
-first_name,last_name,email,email_confirmation
-"Nina","Berg","nina@gmail.com","nina@gmail.com"
-"Test","Test","test@gmail.com","test@gmail.com"
-"first","last","first@gmail.com","first@gmail.com"
+first_name,last_name,email,email_confirmation,role
+"Nina","Berg","nina@gmail.com","nina@gmail.com","Student"
+"Test","Test","test@gmail.com","test@gmail.com","Student"
+"first","last","first@gmail.com","first@gmail.com","Student"
+"admin","admin","admin@gmail.com","admin@gmail.com","Admin"

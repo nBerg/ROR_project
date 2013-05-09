@@ -11,6 +11,9 @@
 				<ul class="nav pull-right">
 					<% if logged_in? %>
 						<li><%= link_to "Edit Profile", edit_user_path(@current_user) %></li>
+						<% if admin? %>
+							<li><%= link_to "List Users", users_path %></li>
+						<% end %>
 						<li><%= link_to "Log out", logout_path %></li>
 					<% else %>
 						<li><%= link_to "Log in", login_path %></li>
