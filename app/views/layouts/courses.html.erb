@@ -16,7 +16,7 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="row-fluid">
-					<% if @course %>
+					<% if @course && params[:action] != "new" %>
 						<div class="span3"><%= render "courses/nav" %></div>
 						<div class="span9"><%= yield %></div>
 					<% else %>

@@ -1,16 +1,17 @@
 class Course
   include Mongoid::Document
+  include Mongoid::MultiParameterAttributes
 
   embeds_many :lectures
   has_and_belongs_to_many :users
 
-  field :CallNumber, type: Integer
-  field :CourseTitle, type: String
-  field :StartTime1, type: String
-  field :EndTime1, type: String
-  field :MeetsOn1, type: String
-  field :Building1, type: String
-  field :Room1, type: String
-  field :Instructor1Name, type: String
+  field :Call_Number, type: Integer
+  field :Course_Title, type: String
+  field :Start_Time, type: Time
+  field :End_Time, type: Time
+  field :Meets_On, type: String
+  field :Building, type: String
+  field :Room, type: String
+  field :Instructor, type: String
 
 end

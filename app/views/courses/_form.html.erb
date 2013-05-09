@@ -1,49 +1,65 @@
-<%= form_for(@course) do |f| %>
-  <% if @course.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+<%= form_for @course, :html => {class: "form-horizontal"} do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 
-      <ul>
-      <% @course.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <div class="field control-group">
+    <%= f.label :Call_Number, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :Call_Number %>
     </div>
-  <% end %>
+  </div>
 
-  <div class="field">
-    <%= f.label :CallNumber %><br />
-    <%= f.text_field :CallNumber %>
+  <div class="field control-group">
+    <%= f.label :Course_Title, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :Course_Title %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :CourseTitle %><br />
-    <%= f.text_field :CourseTitle %>
+
+  <div class="field control-group">
+    <%= f.label :Start_Time, class: "control-label" %>
+    <div class="controls time-select">
+      <%= f.time_select :Start_Time, :time_separator => ' : ', :ampm => true %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :StartTime1 %><br />
-    <%= f.text_field :StartTime1 %>
+
+  <div class="field control-group">
+    <%= f.label :End_Time, class: "control-label" %>
+    <div class="controls time-select">
+      <%= f.time_select :End_Time, :ampm => true %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :EndTime1 %><br />
-    <%= f.text_field :EndTime1 %>
+
+  <div class="field control-group">
+    <%= f.label :Meets_On, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :Meets_On %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :MeetsOn1 %><br />
-    <%= f.text_field :MeetsOn1 %>
+
+  <div class="field control-group">
+    <%= f.label :Building, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :Building %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :Building1 %><br />
-    <%= f.text_field :Building1 %>
+
+  <div class="field control-group">
+    <%= f.label :Room, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :Room %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :Room1 %><br />
-    <%= f.text_field :Room1 %>
+
+  <div class="field control-group">
+    <%= f.label :Instructor, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :Instructor %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :Instructor1Name %><br />
-    <%= f.text_field :Instructor1Name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="actions control-group">
+    <div class="controls">
+      <%= f.submit "Create Course", class: "btn btn-large btn-primary" %>
+    </div>
   </div>
 <% end %>

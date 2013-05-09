@@ -1,21 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  CallNumber: 
-  CourseTitle: 
-  StartTime1: 
-  EndTime1: 
-  MeetsOn1: 
-  Building1: 
-  Room1: 
-  Instructor1Name: 
+  Call_Number: 
+  Course_Title: 
+  Start_Time: 
+  End_Time: 
+  Meets_On: 
+  Building: 
+  Room: 
+  Instructor: 
 
 two:
-  CallNumber: 
-  CourseTitle: 
-  StartTime1: 
-  EndTime1: 
-  MeetsOn1: 
-  Building1: 
-  Room1: 
-  Instructor1Name: 
+  Call_Number: 
+  Course_Title: 
+  Start_Time: 
+  End_Time: 
+  Meets_On: 
+  Building: 
+  Room: 
+  Instructor: 

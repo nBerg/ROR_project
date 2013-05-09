@@ -1,12 +1,12 @@
 <tr>
-	<td><%= link_to course.CallNumber, course %></td>
-	<td><%= link_to course.CourseTitle, course %></td>
-	<td><%= course.MeetsOn1 %></td>
-	<td><%= Time.parse(course.StartTime1).strftime("%I:%M %p") %></td>
-	<td><%= Time.parse(course.EndTime1).strftime("%I:%M %p") %></td>
-	<td><%= course.Instructor1Name %></td>
-	<td><%= course.Building1 %></td>
-	<td><%= course.Room1 %></td>
+	<td><%= link_to course.Call_Number, course %></td>
+	<td><%= link_to course.Course_Title, course %></td>
+	<td><%= course.Meets_On %></td>
+	<td><%= course.Start_Time.strftime("%I:%M %p") %></td>
+	<td><%= course.End_Time.strftime("%I:%M %p") %></td>
+	<td><%= course.Instructor %></td>
+	<td><%= course.Building %></td>
+	<td><%= course.Room %></td>
 	<% if admin? %>
 		<td><%= link_to 'Edit', edit_course_path(course) %> |
 		<%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>

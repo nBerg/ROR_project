@@ -1,12 +1,12 @@
 <div class="well">
   <ul class="nav nav-list">
-    <li class="nav-header center"><%= @course.CallNumber %> - <%= @course.CourseTitle %></li>
+    <li class="nav-header center"><%= @course.Call_Number %> - <%= @course.Course_Title %></li>
     <p class="center">
-    <%= @course.MeetsOn1 %> 
-    <%= Time.parse(@course.StartTime1).strftime("%I:%M %p") %> - 
-    <%= Time.parse(@course.EndTime1).strftime("%I:%M %p") %> <br>
-    <%= @course.Room1 %> <%= @course.Building1 %> <br>
-    <%= @course.Instructor1Name %>
+    <%= @course.Meets_On %> 
+    <%= @course.Start_Time.strftime("%I:%M %p") %> - 
+    <%= @course.End_Time.strftime("%I:%M %p") %> <br>
+    <%= @course.Room %> <%= @course.Building %> <br>
+    <%= @course.Instructor %>
   </p>
 
     <li class="divider"></li>

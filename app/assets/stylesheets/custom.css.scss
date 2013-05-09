@@ -106,13 +106,18 @@ footer {
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
-  padding: 10px;
   margin-bottom: 15px;
   @include box_sizing;
 }
 
 input {
   height: auto !important;
+}
+
+.time-select {
+  select {
+    width: 15%;
+  }
 }
 
 #error_explanation {
@@ -127,6 +132,8 @@ input {
   @extend .control-group;
   @extend .error;
 }
+
+
 
 /* user's course list */
 .courses-list ul {

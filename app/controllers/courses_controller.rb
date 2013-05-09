@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.order_by('CallNumber ASC').paginate(page: params[:page], :per_page => 30)
+    @courses = Course.order_by('Call_Number ASC').paginate(page: params[:page], :per_page => 30)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -46,7 +46,8 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
+        flash[:success] = 'Course was successfully created.'
+        format.html { redirect_to @course }
         format.json { render json: @course, status: :created, location: @course }
       else
         format.html { render action: "new" }
@@ -73,7 +74,8 @@ class CoursesController < ApplicationController
         end
       else
         if @course.update_attributes(params[:course])
-          format.html { redirect_to @course, notice: 'Course was successfully updated.' }
+          flash[:success] = 'Course was successfully updated.'
+          format.html { redirect_to @course }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }

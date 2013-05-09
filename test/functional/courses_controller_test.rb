@@ -18,7 +18,7 @@ class CoursesControllerTest < ActionController::TestCase
 
   test "should create course" do
     assert_difference('Course.count') do
-      post :create, course: { Building1: @course.Building1, CallNumber: @course.CallNumber, CourseTitle: @course.CourseTitle, EndTime1: @course.EndTime1, Instructor1Name: @course.Instructor1Name, MeetsOn1: @course.MeetsOn1, Room1: @course.Room1, StartTime1: @course.StartTime1 }
+      post :create, course: { Building: @course.Building, Call_Number: @course.Call_Number, Course_Title: @course.Course_Title, End_Time: @course.End_Time, Instructor: @course.Instructor, Meets_On: @course.Meets_On, Room: @course.Room, Start_Time: @course.Start_Time }
     end
 
     assert_redirected_to course_path(assigns(:course))
@@ -35,7 +35,7 @@ class CoursesControllerTest < ActionController::TestCase
   end
 
   test "should update course" do
-    put :update, id: @course, course: { Building1: @course.Building1, CallNumber: @course.CallNumber, CourseTitle: @course.CourseTitle, EndTime1: @course.EndTime1, Instructor1Name: @course.Instructor1Name, MeetsOn1: @course.MeetsOn1, Room1: @course.Room1, StartTime1: @course.StartTime1 }
+    put :update, id: @course, course: { Building: @course.Building, Call_Number: @course.Call_Number, Course_Title: @course.Course_Title, End_Time: @course.End_Time, Instructor: @course.Instructor, Meets_On: @course.Meets_On, Room: @course.Room, Start_Time: @course.Start_Time }
     assert_redirected_to course_path(assigns(:course))
   end
 
