@@ -1,6 +1,6 @@
-<h1>Editing lecture</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @lecture %> |
-<%= link_to 'Back', course_lectures_path(@course) %>
+<div class="row-fluid">
+	<div class="span8">
+		<h1>Editing Lecture <%= @lecture.num %></h1>
+		<%= render 'form' %>
+	</div>
+</div>

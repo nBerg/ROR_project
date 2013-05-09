@@ -3,6 +3,7 @@ class Assignment
 
   embedded_in :lecture
 
+  field :title, type: String
   field :content, type: String
   field :due, type: Date
 end

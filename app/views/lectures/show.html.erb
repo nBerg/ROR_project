@@ -1,10 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="row-fluid">
+	<div class="span8">
+		<h2><%= "Lecture #{@lecture.num}: #{@lecture.title}" %></h2>
+		<%= @lecture.content %>
+	</div>
+</div>
 
-<p>
-  <b>Num:</b>
-  <%= @lecture.num %>
-</p>
+<div class="row-fluid">
+	<div class="span8">
+		<h2>Assignments:</h2>
+		<ul>
+			<% @lecture.assignments.each do |assignment| %>
+				<li><%= assignment.title %> <%= assignment.due %></li>
+			<% end %>
+		</ul>
+	</div>
+</div> 
 
+<br>
 
-<%= link_to 'Edit', edit_course_lecture_path(@course, @lecture) %> |
-<%= link_to 'Back', course_lectures_path %>
+<%= link_to 'Edit', edit_course_lecture_path(@course, @lecture) %>

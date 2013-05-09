@@ -1,21 +1,30 @@
-<%= form_for [@course, @lecture] do |f| %>
-  <% if @lecture.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@lecture.errors.count, "error") %> prohibited this lecture from being saved:</h2>
+<%= form_for [@course, @lecture], :html => {class: "form-horizontal"} do |f| %>
 
-      <ul>
-      <% @lecture.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="field control-group">
+    <%= f.label :title, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :title %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :num %><br />
-    <%= f.text_field :num %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="field control-group">
+    <%= f.label :content, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_area :content %>
+    </div>
+  </div>
+
+  <div class="actions control-group">
+    <div class="controls">
+      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+
+      <%= link_to "Delete this lecture", 
+          course_lecture_path(@course, @lecture),
+          method: :delete, 
+          data: { confirm: 'Are you sure?' }, 
+          class: "btn btn-large btn-primary" %>
+    </div>
   </div>
 <% end %>

@@ -13,5 +13,6 @@ class Course
   field :Building, type: String
   field :Room, type: String
   field :Instructor, type: String
+  field :Num_Lectures, type: Integer, default: 0
 
 end

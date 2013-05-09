@@ -6,4 +6,6 @@ class Lecture
   embeds_many :uploads
 
   field :num, type: Integer
+  field :title, type: String
+  field :content, type: String
 end

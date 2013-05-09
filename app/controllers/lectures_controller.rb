@@ -1,97 +1,78 @@
 class LecturesController < ApplicationController
   before_filter :get_course
+  before_filter :require_admin, :except => [:show]
 
-  # GET /lectures
-  # GET /lectures.json
-  def index
-    @lectures = @course.lectures
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @lectures }
-    end
-  end
-
-  # GET /lectures/1
-  # GET /lectures/1.json
+  # GET /course/1/lectures/1
   def show
     @lecture = @course.lectures.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @lecture }
     end
   end
 
-  # GET /lectures/new
-  # GET /lectures/new.json
-  def new
-    @lecture = @course.lectures.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @lecture }
-    end
-  end
-
-  # GET /lectures/1/edit
+  # GET /courses/1/lectures/1/edit
   def edit
     @lecture = @course.lectures.find(params[:id])
+
+    logger.debug @course
+    logger.debug @lecture
   end
 
-  # POST /lectures
-  # POST /lectures.json
+  # POST /course/1/lectures
   def create
-
-    logger.debug "HERE2"
-    logger.debug params
-
-    @lecture = @course.lectures.new(params[:lecture])
+    next_num = @course.Num_Lectures + 1
+    @lecture = @course.lectures.new(:num => next_num)
+    @course.Num_Lectures = next_num
 
     respond_to do |format|
-      if @lecture.save
-        flash[:success] = 'Lecture was successfully created.'
-        format.html { redirect_to course_lectures_path(@course) }
-        format.json { render json: @lecture, status: :created, location: @lecture }
+      if @lecture.save && @course.save
+        format.html { redirect_to edit_course_lecture_url(@course, @lecture) }
       else
-        format.html { render action: "new" }
-        format.json { render json: @lecture.errors, status: :unprocessable_entity }
+        # TODO: May be a problem where one is saved and not the other
+        format.html { render action: course_path(@course) }
       end
     end
   end
 
-  # PUT /lectures/1
-  # PUT /lectures/1.json
+  # PUT /courses/1/lectures/1
   def update
     @lecture = @course.lectures.find(params[:id])
 
     respond_to do |format|
       if @lecture.update_attributes(params[:lecture])
-        format.html { redirect_to @lecture, notice: 'Lecture was successfully updated.' }
-        format.json { head :no_content }
+        flash[:success] = 'Lecture was successfully updated.'
+        format.html { redirect_to [@course, @lecture] }
       else
         format.html { render action: "edit" }
-        format.json { render json: @lecture.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /lectures/1
-  # DELETE /lectures/1.json
+  # DELETE /course/1/lectures/1
   def destroy
     @lecture = @course.lectures.find(params[:id])
+
+    if (@lecture.num == @course.Num_Lectures)
+      @course.Num_Lectures -= 1
+      @course.save
+    end
+
     @lecture.destroy
 
+    # TODO: Need to figure out how I want to deal with this
+
     respond_to do |format|
-      format.html { redirect_to course_lectures_url }
-      format.json { head :no_content }
+      flash[:success] = 'Lecture was successfully destroyed.'
+      format.html { redirect_to course_url(@course) }
     end
   end
 
-  def get_course
-    logger.debug "HERE"
-    logger.debug params
-    @course = Course.find(params[:course_id])
-  end
+
+  private
+
+    def get_course
+      @course = Course.find(params[:course_id])
+    end
 
 end
