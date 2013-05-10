@@ -3,6 +3,7 @@ class Course
   include Mongoid::MultiParameterAttributes
 
   embeds_many :lectures
+  embeds_many :announcements
   has_and_belongs_to_many :users
 
   field :Call_Number, type: Integer

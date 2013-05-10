@@ -1,8 +1,9 @@
 RORProject::Application.routes.draw do
-  
+
   resources :courses do
     resources :lectures, :except => [:index, :new]
     resources :enrollments, :except => [:edit, :update, :show]
+    resources :announcements
   end 
 
   resources :uploads, :assignments

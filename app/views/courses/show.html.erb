@@ -1,10 +1,21 @@
 <div class="row-fluid">
 
-  <h3><%= @course.Call_Number %> - <%= @course.Course_Title %></h3>
-  <%= @course.Meets_On %> 
-  <%= @course.Start_Time.strftime("%I:%M %p") %> - 
-  <%= @course.End_Time.strftime("%I:%M %p") %> <br>
-  <%= @course.Room %> <%= @course.Building %> <br>
-  <%= @course.Instructor %>
+	<div class="span8">
+  	<h2><%= @course.Call_Number %> - <%= @course.Course_Title %></h2>
 
+  	<div class="row-fluid">
+			<%= @course.Meets_On %> 
+			<%= @course.Start_Time.strftime("%I:%M %p") %> - 
+			<%= @course.End_Time.strftime("%I:%M %p") %> <br>
+			<%= @course.Room %> <%= @course.Building %> <br>
+			<%= @course.Instructor %>
+		
+		
+			<% if admin? %>
+				<br>
+				<%= link_to "Edit course info", edit_course_path(@course), class: "pull-right" %>
+			<% end %>
+			
+  	</div>
+	</div>
 </div>

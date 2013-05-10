@@ -1,6 +1,8 @@
 <div class="well">
 	<ul class="nav nav-list">
-		<li class="nav-header center"><%= @course.Call_Number %> - <%= @course.Course_Title %></li>
+		<li class="nav-header center">
+			<%= link_to "#{@course.Call_Number} - #{@course.Course_Title}", course_path(@course) %>
+		</li>
 		<p class="center">
 			<%= @course.Meets_On %> 
 			<%= @course.Start_Time.strftime("%I:%M %p") %> - 
@@ -24,6 +26,7 @@
 
 		<li class="divider"></li>
 		<li><a href="#">Assignments</a></li>
+		<li><%= link_to "Announcements", course_announcements_path(@course) %></li>
 		<li><%= link_to "Roster", course_enrollments_path(@course) %></li>
 	</ul>
 </div>

@@ -1,0 +1,15 @@
+<div class="row-fluid">
+	<div class="span8">
+		<h2><%= @announcement.title %></h2>
+		<%= markdown(@announcement.content) %>
+	</div>
+</div>
+
+<br>
+
+<% if admin? %>
+	<div class="span8 pull-right">
+		<%= link_to 'Edit this announcement', edit_course_announcement_path(@course, @announcement) %> |
+		<%= link_to 'Delete this announcement', course_announcement_path(@course, @announcement), method: :delete, data: { confirm: 'Are you sure?' } %>
+	</div>
+<% end %>

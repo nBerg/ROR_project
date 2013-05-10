@@ -1,0 +1,21 @@
+<div class="row-fluid">
+  <div class="span8">
+    <h1>Announcements</h1>
+
+    <dl>
+      <% @course.announcements.each do |announcement| %>
+        <dt><%= link_to announcement.title, course_announcement_path(@course, announcement) %></dt>
+        <small class="pull-right"><%= announcement.Date %></small><br>
+        <dd><%= markdown(announcement.content) %></dd>
+        <hr>
+      <% end %>
+    </dl>
+
+
+    <% if admin? %>
+      <br>
+      <%= link_to "Add New Announcement", new_course_announcement_path(@course), class: "pull-right"%>
+    <% end %>
+
+  </div>
+</div>
