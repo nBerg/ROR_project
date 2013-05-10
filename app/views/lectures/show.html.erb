@@ -1,7 +1,7 @@
 <div class="row-fluid">
 	<div class="span8">
 		<h2><%= "Lecture #{@lecture.num}: #{@lecture.title}" %></h2>
-		<%= @lecture.content %>
+		<%= (@lecture.content_html).html_safe %>
 	</div>
 </div>
 
