@@ -2,20 +2,31 @@
 	<div class="span8">
 		<h2><%= "Lecture #{@lecture.num}: #{@lecture.title}" %></h2>
 		<%= markdown(@lecture.content) %>
+
+		<%= link_to 'Edit', edit_course_lecture_path(@course, @lecture), class: "pull-right" %>
 	</div>
 </div>
 
+
+
+<hr>
+
 <div class="row-fluid">
 	<div class="span8">
-		<h2>Assignments:</h2>
-		<ul>
+		<h2>Assignments</h2>
+		<ol>
 			<% @lecture.assignments.each do |assignment| %>
-				<li><%= assignment.title %> <%= assignment.due %></li>
+				<li><%= link_to assignment.title, course_lecture_assignment_path(@course, @lecture, assignment)%> &nbsp;&nbsp;&nbsp; Due: <%= assignment.due.strftime("%B %d, %Y")%>
+
+					<% if admin? %>
+						<%= link_to 'Delete', course_lecture_assignment_path(@course,  @lecture, assignment), method: :delete, data: { confirm: 'Are you sure?' }, class: "pull-right" %></li>
+					<% end %>
+					
 			<% end %>
-		</ul>
+		</ol>
+
+		<% if admin? %>
+			<%= link_to 'New', new_course_lecture_assignment_path(@course, @lecture), class: "pull-right" %>
+		<% end %>
 	</div>
 </div> 
-
-<br>
-
-<%= link_to 'Edit', edit_course_lecture_path(@course, @lecture) %>

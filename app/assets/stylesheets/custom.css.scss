@@ -120,6 +120,12 @@ input {
   }
 }
 
+.date-select {
+  select {
+    width: 30%;
+  }
+}
+
 #error_explanation {
   color: #b94a48;
   ul {

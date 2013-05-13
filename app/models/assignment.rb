@@ -1,5 +1,7 @@
 class Assignment
   include Mongoid::Document
+  include Mongoid::MultiParameterAttributes
+
 
   embedded_in :lecture
 

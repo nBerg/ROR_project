@@ -1,15 +1,11 @@
-<p id="notice"><%= notice %></p>
+<div class="row-fluid">
+	<div class="span8">
+		<h2><%= "Assignment: #{@assignment.title}" %></h2>
+		<small>Due: <%= @assignment.due.strftime("%B %e, %Y") %></small>
+		<%= markdown(@assignment.content) %>
 
-<p>
-  <b>Content:</b>
-  <%= @assignment.content %>
-</p>
-
-<p>
-  <b>Due:</b>
-  <%= @assignment.due %>
-</p>
-
-
-<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
-<%= link_to 'Back', assignments_path %>
+		<% if admin? %>
+			<%= link_to 'Edit', edit_course_lecture_assignment_path(@course, @lecture, @assignment), class: "pull-right" %>
+		<% end %>
+	</div>
+</div> 

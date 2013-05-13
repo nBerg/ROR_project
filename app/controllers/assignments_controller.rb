@@ -1,83 +1,86 @@
 class AssignmentsController < ApplicationController
-  # GET /assignments
-  # GET /assignments.json
+  before_filter :get_lecture, :except => [:index]
+  before_filter :get_course, :only => [:index]
+  before_filter :require_admin, :except => [:index, :show]
+
+  # GET /courses/1/assignments
   def index
-    @assignments = Assignment.all
+    @lectures = @course.lectures.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @assignments }
     end
   end
 
-  # GET /assignments/1
-  # GET /assignments/1.json
+  # GET /courses/1/lectures/1/assignments/1
   def show
-    @assignment = Assignment.find(params[:id])
+    @assignment = @lecture.assignments.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @assignment }
     end
   end
 
-  # GET /assignments/new
-  # GET /assignments/new.json
+  # GET /courses/1/lectures/1/assignments/new
   def new
-    @assignment = Assignment.new
+    @assignment = @lecture.assignments.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @assignment }
     end
   end
 
-  # GET /assignments/1/edit
+  # GET /courses/1/lectures/1/assignments/1/edit
   def edit
-    @assignment = Assignment.find(params[:id])
+    @assignment = @lecture.assignments.find(params[:id])
   end
 
-  # POST /assignments
-  # POST /assignments.json
+  # POST /courses/1/lectures/1/assignments
   def create
-    @assignment = Assignment.new(params[:assignment])
+    @assignment = @lecture.assignments.new(params[:assignment])
 
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
-        format.json { render json: @assignment, status: :created, location: @assignment }
+        flash[:success] = 'Assignment was successfully created.'
+        format.html { redirect_to [@course, @lecture, @assignment] }
       else
         format.html { render action: "new" }
-        format.json { render json: @assignment.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /assignments/1
-  # PUT /assignments/1.json
+  # PUT /courses/1/lectures/1/assignments/1
   def update
-    @assignment = Assignment.find(params[:id])
+    @assignment = @lecture.assignments.find(params[:id])
 
     respond_to do |format|
       if @assignment.update_attributes(params[:assignment])
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully updated.' }
-        format.json { head :no_content }
+        flash[:success] = 'Assignment was successfully updated.'
+        format.html { redirect_to [@course, @lecture, @assignment] }
       else
         format.html { render action: "edit" }
-        format.json { render json: @assignment.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /assignments/1
-  # DELETE /assignments/1.json
+  # DELETE /courses/1/lectures/1/assignments/1
   def destroy
-    @assignment = Assignment.find(params[:id])
+    @assignment = @lecture.assignments.find(params[:id])
     @assignment.destroy
 
     respond_to do |format|
-      format.html { redirect_to assignments_url }
-      format.json { head :no_content }
+      format.html { redirect_to [@course, @lecture] }
     end
   end
+
+  private
+
+    def get_course
+      @course = Course.find(params[:course_id])
+    end
+
+    def get_lecture
+      get_course
+      @lecture = @course.lectures.find(params[:lecture_id])
+    end
 end
