@@ -16,4 +16,6 @@ class Course
   field :Instructor, type: String
   field :Num_Lectures, type: Integer, default: 0
 
+  validates :Course_Title, :presence => true
+
 end
