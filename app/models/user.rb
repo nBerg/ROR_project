@@ -12,4 +12,6 @@ class User
   before_save { first_name.capitalize! }
   before_save { last_name.capitalize! }
 
+  validates :email, :presence => true
+
 end
