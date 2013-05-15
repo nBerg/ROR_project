@@ -8,6 +8,10 @@ class Lecture
   field :num, type: Integer
   field :title, type: String
   field :content, type: String
-  field :content_html, type: String
+
+	before_save { title.capitalize! }
+
+  validates :num, presence: true
+  validates :title, presence: true
 
 end

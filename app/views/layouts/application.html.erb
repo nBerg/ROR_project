@@ -18,11 +18,11 @@
 			<div class="span12">
 				<div class="row-fluid">
 
-					<% if @course && (params[:action] != "new" || params[:controller] != "courses") %>
+					<% if @course && (params[:action] != "new" && params[:action] != "create" || params[:controller] != "courses") %>
 						<div class="span3"><%= render "shared/course_nav" %></div>
 						<div class="span9"><%= yield %></div>
 
-					<% elsif @user && (params[:action] != "new" || params[:controller] != "users") %>
+					<% elsif @user && (params[:action] != "new" && params[:action] != "create" || params[:controller] != "users") %>
 						<div class="span3"><%= render "shared/user_nav" %></div>
 						<div class="span9"><%= yield %></div>
 						

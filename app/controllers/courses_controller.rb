@@ -48,10 +48,12 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
+        logger.debug 'saved!!!!'
         flash[:success] = 'Course was successfully created.'
         format.html { redirect_to @course }
         format.json { render json: @course, status: :created, location: @course }
       else
+        logger.debug 'not saved!!!!'
         format.html { render action: "new" }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end

@@ -51,9 +51,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        user = User.find_by(email: @user.email)
         session[:user] = user
-        session[:user_id] = user.id
         
         flash[:success] = 'User was successfully created.'
         format.html { redirect_to @user }

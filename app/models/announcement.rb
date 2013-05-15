@@ -9,4 +9,7 @@ class Announcement
 
   before_save { self.Date = DateTime.now }
   before_save { title.capitalize! }
+
+  validates :title, presence: true
+  
 end
