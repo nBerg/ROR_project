@@ -1,5 +1,13 @@
 Nina Berg
 nb2555
 
+CourseManager
+=============
 
-Meetup: April 2013 NY Tech Meetup
+Features added:
+
+1. Admins can add text to courses in markdown (lecture content, assignments, and announcments)
+
+2. Admins can add announcements to courses
+
+3. Used twitter bboststrap to make the site look nice
