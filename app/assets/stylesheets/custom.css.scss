@@ -12,12 +12,25 @@ $grayMediumLight: #eaeaea;
 
 /* universal */
 
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -111px;
+}
+
+#wrap > .container-fluid {
+  padding-top: 60px;
+}
+
 html {
   overflow-y: scroll;
+  height: 100%;
 }
 
 body {
-  padding-top: 60px;
+  height: 100%
+//  padding-top: 60px;
 }
 
 section {
@@ -76,7 +89,12 @@ p {
 
 /* footer */
 
+#push {
+  height: 60px;
+}
+
 footer {
+  height: 60px;
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;

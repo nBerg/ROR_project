@@ -8,33 +8,38 @@
 </head>
 
 <body>
-	<%= render "layouts/header" %>
-	<div class="container-fluid">
-		<% flash.each do |key, value| %>
-			<div class="alert alert-<%= key %>"><%= value %></div>
-		<% end %>
-		
-		<div class="row-fluid">
-			<div class="span12">
-				<div class="row-fluid">
+	<div id="wrap">		
+		<%= render "layouts/header" %>
+		<div class="container-fluid">
+			<% flash.each do |key, value| %>
+				<div class="alert alert-<%= key %>"><%= value %></div>
+			<% end %>
+			
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
 
-					<% if @course && (params[:action] != "new" && params[:action] != "create" || params[:controller] != "courses") %>
-						<div class="span3"><%= render "shared/course_nav" %></div>
-						<div class="span9"><%= yield %></div>
+						<% if @course && (params[:action] != "new" && params[:action] != "create" || params[:controller] != "courses") %>
+							<div class="span3"><%= render "shared/course_nav" %></div>
+							<div class="span9"><%= yield %></div>
 
-					<% elsif @user && (params[:action] != "new" && params[:action] != "create" || params[:controller] != "users") %>
-						<div class="span3"><%= render "shared/user_nav" %></div>
-						<div class="span9"><%= yield %></div>
-						
-					<% else %>
-						<div class="span12"><%= yield %></div>
-					<% end %>
+						<% elsif @user && (params[:action] != "new" && params[:action] != "create" || params[:controller] != "users") %>
+							<div class="span3"><%= render "shared/user_nav" %></div>
+							<div class="span9"><%= yield %></div>
+							
+						<% else %>
+							<div class="span12"><%= yield %></div>
+						<% end %>
+					</div>
 				</div>
 			</div>
 		</div>
+
+		<div id="push"></div>
+
 	</div>
 	
-<%= render "layouts/footer" %>
+	<%= render "layouts/footer" %>
 
 </body>
 </html>
