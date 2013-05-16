@@ -10,6 +10,6 @@ class Assignment
 
 	before_save { title.capitalize! }
 
-  validates :tile, presence: true
+  validates :title, presence: true
   validates :due, presence: true
 end

@@ -1,9 +1,9 @@
 <div class="row-fluid">
-  <div class="offset1 span4 courses-list">
-    <h2>Registered Students:</h2>
+  <div class="span8 courses-list">
+    <h2> Registered Students</h2>
     <% @course.users.each do |user| %>
       <ul>
-        <li>
+        <li class="text-center">
           <%= link_to "#{user.first_name} #{user.last_name}", user %>
           <% if admin? %>
             <div class="pull-right">

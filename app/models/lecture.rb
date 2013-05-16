@@ -9,9 +9,6 @@ class Lecture
   field :title, type: String
   field :content, type: String
 
-	before_save { title.capitalize! }
-
   validates :num, presence: true
-  validates :title, presence: true
 
 end

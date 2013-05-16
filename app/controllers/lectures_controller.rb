@@ -14,9 +14,6 @@ class LecturesController < ApplicationController
   # GET /courses/1/lectures/1/edit
   def edit
     @lecture = @course.lectures.find(params[:id])
-
-    logger.debug @course
-    logger.debug @lecture
   end
 
   # POST /course/1/lectures
@@ -25,11 +22,15 @@ class LecturesController < ApplicationController
     @lecture = @course.lectures.new(:num => next_num)
     @course.Num_Lectures = next_num
 
+    logger.debug "in create!"
+
     respond_to do |format|
       if @lecture.save && @course.save
+        logger.debug "here"
         format.html { redirect_to edit_course_lecture_url(@course, @lecture) }
       else
         # TODO: May be a problem where one is saved and not the other
+        logger.debug "error"
         format.html { render action: course_path(@course) }
       end
     end

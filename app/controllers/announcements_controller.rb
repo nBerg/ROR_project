@@ -41,7 +41,7 @@ class AnnouncementsController < ApplicationController
     respond_to do |format|
       if @announcement.save
         flash[:success] = 'Announcement was successfully created.'
-        format.html { redirect_to course_url(@course) }
+        format.html { redirect_to [@course, @announcement] }
       else
         format.html { render action: "new" }
       end
